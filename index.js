@@ -1,7 +1,7 @@
   import TelegramBot from 'node-telegram-bot-api';
   import got from 'got';
 
-  const token = '5867082415:AAGg3-MRiKEVZK0eZHlTD4U5v7_vj08TvVQ';
+  const token = process.env.TELEGRAM_API_KEY;
   const bot = new TelegramBot(token, {polling: true});
 
 
