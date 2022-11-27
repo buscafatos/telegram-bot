@@ -1,7 +1,7 @@
   import TelegramBot from 'node-telegram-bot-api';
   import got from 'got';
 
-  const token = process.env.TELEGRAM_API_KEY;
+  const token = process.env.TELEGRAM_API_KEY || '5867082415:AAEx7FgKaXqMiHpDegv9OX-umFGvuXGbVXs';
   const bot = new TelegramBot(token, {polling: true});
 
 
@@ -101,6 +101,12 @@ bot.onText(/\/ajuda/, (msg) => {
   bot.onText(/\/recentes (.+)/, async (msg, match) => {
 
     const chatId = msg.chat.id;
+
+      let username = '';
+      if (msg.from.username) {
+        username = msg.from.username;
+      }
+
     let searchTerm = match[1];
 
     let arr = searchTerm.split('#');
@@ -111,7 +117,7 @@ bot.onText(/\/ajuda/, (msg) => {
       searchTerm = arr[0];
     }
 
-    console.log(`keyword = [${searchTerm}] and nOfResults = [${numberOfResults}]`)
+    console.log(`username = [${username}] - keyword = [${searchTerm}] and nOfResults = [${numberOfResults}]`)
 
     const url = `https://busca-fatos.deno.dev/v1/search/${searchTerm}?raw=0&count=${numberOfResults}&sort=date`;
     // console.log(`fetching keyword = [${searchTerm}]`)
