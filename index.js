@@ -1,8 +1,10 @@
   import TelegramBot from 'node-telegram-bot-api';
   import got from 'got';
 
-  const token = process.env.TELEGRAM_API_KEY || '5867082415:AAEx7FgKaXqMiHpDegv9OX-umFGvuXGbVXs';
+  const token = process.env.TELEGRAM_API_KEY;
   const bot = new TelegramBot(token, {polling: true});
+
+  // https://github.com/yagop/node-telegram-bot-api/blob/master/doc/api.md#TelegramBot+on
 
 
 
@@ -60,6 +62,8 @@ fonte = ${parsed.items[i].source}
    * */
   const startMsg = `Bem vindo ao <a href="https://buscafatos.com.br/">Busca Fatos</a> <b>BETA</b>.
 
+For help in english just type <b>/help</b>
+
 Simplesmente nos envie uma mensagem e ela será verificada.
 
 Exemplo; <b>urna eletrônica</b>
@@ -84,6 +88,37 @@ Temos também uma <a href="https://busca-fatos.fly.dev/">Interface Web</a> para 
 
 `;
 
+
+  /**
+   * /help
+   * 
+   * */
+  const helpMsg = `Welcome to <a href="https://buscafatos.com.br/">Fact Search</a> <b>BETA</b>.
+
+Simply send us a message and it will be verified.
+
+Example; <b>electronic ballot box</b>
+
+Whenever you need to type <b>/help</b>
+
+For searches ordered by data <b>DECRESCENT</b>,
+use the command <b>/recent</b> Example;
+
+<b>/recent electronic ballot box</b>
+
+To control the number of returned items just put # number ( 1 to 10 ) Example;
+
+<b>/recent electronic voting machine #9</b>
+you
+<b>electronic voting machine #9</b>
+
+Both searches above will return 9 results. The top search brings up the
+results sorted by date <b>DESCENDING</b>.
+
+We also have a <a href="https://busca-fatos.fly.dev/">Web Interface</a> for consultation.
+
+`;
+
 bot.onText(/\/start/, (msg) => {
 
   bot.sendMessage(msg.chat.id, startMsg, {parse_mode: 'HTML'});
@@ -96,6 +131,12 @@ bot.onText(/\/ajuda/, (msg) => {
 
 });
 
+
+bot.onText(/\/help/, (msg) => {
+
+  bot.sendMessage(msg.chat.id, helpMsg, {parse_mode: 'HTML'});
+
+});
 
   // Matches "/recentes [whatever]"
   bot.onText(/\/recentes (.+)/, async (msg, match) => {
