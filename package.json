@@ -1,0 +1,32 @@
+{
+  "name": "teleggram-bot",
+  "version": "0.0.1",
+  "description": "telegram bot that does fact-checking",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/buscafatos/telegram-bot.git"
+  },
+  "keywords": [
+    "fact-ckecking",
+    "telegram",
+    "bot",
+    "anti",
+    "fake-news"
+  ],
+  "author": "fcavalcantirj",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/buscafatos/telegram-bot/issues"
+  },
+  "homepage": "https://github.com/buscafatos/telegram-bot#readme",
+  "dependencies": {
+    "got": "^12.5.3",
+    "node-telegram-bot-api": "^0.60.0"
+  }
+}
