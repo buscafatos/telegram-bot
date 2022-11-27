@@ -4,7 +4,8 @@
   const token = process.env.TELEGRAM_API_KEY;
   const bot = new TelegramBot(token, {polling: true});
 
-  // https://github.com/yagop/node-telegram-bot-api/blob/master/doc/api.md#TelegramBot+on
+
+
 
   /**
    * Metodo que pega o json 'cru' da API e da uma limpada
