@@ -140,7 +140,7 @@ bot.onText(/\/help/, (msg) => {
   // Matches "/recentes [whatever]"
   bot.onText(/\/recentes (.+)/, async (msg, match) => {
 
-    const chatId = msg.chat.id;
+      const chatId = msg.chat.id;
 
       let username = '';
       if (msg.from.username) {
@@ -173,9 +173,12 @@ bot.onText(/\/help/, (msg) => {
 
   bot.on('message', async (msg) => {
 
-    if (!msg.text) {
-      return;
-    }
+
+      // console.log(msg);
+
+      if (!msg.text) {
+        return;
+      }
 
     if (!msg.text.includes('/start') && !msg.text.includes('/recentes')
        && !msg.text.includes('/ajuda') && !msg.text.includes('/help')) {
@@ -192,6 +195,16 @@ bot.onText(/\/help/, (msg) => {
       }
       
       let searchTerm = msg.text;
+
+      if ('group' == msg.chat.type && msg.reply_to_message
+        && '@buscafatos_bot' == msg.text) {
+
+        searchTerm = msg.reply_to_message.text;
+
+      } else if ('group' == msg.chat.type) {
+        // console.log('ignoring group message. only replies');
+        return;
+      }
 
       let arr = searchTerm.split('#');
       let numberOfResults = 3; // default
