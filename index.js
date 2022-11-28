@@ -66,7 +66,7 @@ Simplesmente nos envie uma mensagem e ela será verificada.
 
 Exemplo; <b>urna eletrônica</b>
 
-Sempre que precisar digite  <b>/ajuda</b>
+Sempre que precisar digite <b>/ajuda</b>
 
 Para buscas ordenadas por data <b>DECRESCENTE</b>,
 utilize o comando <b>/recentes</b> Exemplo;
@@ -82,6 +82,7 @@ ou
 Ambas as buscas acima trarão 9 resultados. A busca de cima traz os
 resultados ordenados por data <b>DECRESCENTE</b>.
 
+
 Temos também uma <a href="https://busca-fatos.fly.dev/">Interface Web</a> para consulta.
 
 `;
@@ -93,6 +94,8 @@ Temos também uma <a href="https://busca-fatos.fly.dev/">Interface Web</a> para 
    * 
    * */
   const helpMsg = `Welcome to <a href="https://buscafatos.com.br/">Fact Search</a> <b>BETA</b>.
+
+Para ajuda em português digite <b>/ajuda</b>
 
 Simply send us a message and it will be verified.
 
@@ -113,6 +116,7 @@ you
 
 Both searches above will return 9 results. The top search brings up the
 results sorted by date <b>DESCENDING</b>.
+
 
 We also have a <a href="https://busca-fatos.fly.dev/">Web Interface</a> for consultation.
 
@@ -216,7 +220,7 @@ bot.onText(/\/help/, (msg) => {
 
       console.log(`username = [${username}] - keyword = [${searchTerm}] - nOfResults = [${numberOfResults}]`)
 
-      const url = `https://busca-fatos.deno.dev/v1/search/${searchTerm}?raw=0&count=${numberOfResults}`;
+      const url = `https://api.buscafatos.com.br/v1/search/${searchTerm}?raw=0&count=${numberOfResults}`;
       // console.log(`fetching keyword = [${searchTerm}]`)
       const data = await got(url).text();
       // console.log(data)
