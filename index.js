@@ -75,7 +75,7 @@ Para controlar o número de itens retornados basta colocar # número ( 1 a 10 ) 
 ou
 <b>urna eletrônica #9</b>
 ou
-<b>/busca urna eletrônica #5
+<b>/busca urna eletrônica #5</b>
 
 
 Temos também uma <a href="https://busca-fatos.fly.dev/">Interface Web</a> para consulta.
