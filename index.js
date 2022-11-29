@@ -94,8 +94,9 @@ For help in english type <b>/help</b>
 Simplesmente nos envie uma mensagem e ela será verificada.
 
 Exemplo; <b>urna eletrônica</b>
+ou
 
-Sempre que precisar digite <b>/ajuda</b>
+<b>/busca urna eletrônica</b> - ordenação default, igual a busca acima
 
 Para buscas ordenadas por data <b>DECRESCENTE</b>,
 utilize o comando <b>/recentes</b> Exemplo;
@@ -123,22 +124,23 @@ Temos também uma <a href="https://busca-fatos.fly.dev/">Interface Web</a> para 
    * */
   const helpMsg = `Welcome to <a href="https://buscafatos.com.br/">Fact Search</a> <b>BETA</b>.
 
-Para ajuda em português digite <b>/ajuda</b>
+Para obter ajuda em inglês, digite <b>/help</b>
 
 Simply send us a message and it will be verified.
 
 Example; <b>electronic ballot box</b>
+or
 
-Whenever you need to type <b>/help</b>
+<b>/busca electronic ballot</b> - default ordering, same as search above
 
-For searches ordered by data <b>DECRESCENT</b>,
-use the command <b>/recent</b> Example;
+For searches ordered by date <b>DECRESCENT</b>,
+use the command <b>/recentes</b> Example;
 
-<b>/recent electronic ballot box</b>
+<b>/recentes electronic ballot box</b>
 
 To control the number of returned items just put # number ( 1 to 10 ) Example;
 
-<b>/recent electronic voting machine #9</b>
+<b>/recentes electronic voting machine #9</b>
 you
 <b>electronic voting machine #9</b>
 
@@ -152,7 +154,6 @@ We also have a <a href="https://busca-fatos.fly.dev/">Web Interface</a> for cons
 
 bot.setMyCommands([
   { command: "busca", description: "digite /busca urna eletrônica" },
-  { command: "recentes", description: "digite /recentes urna eletrônica" },
   { command: "recentes", description: "digite /recentes urna eletrônica #5" },
   { command: "start", description: "informações sobre o bot" },
   { command: "ajuda", description: "ajuda" },
