@@ -54,10 +54,40 @@ fonte = ${parsed.items[i].source}
 
 
   /**
-   * /start e /ajuda
+   * /start
    * 
    * */
   const startMsg = `Bem vindo ao <a href="https://buscafatos.com.br/">Busca Fatos</a> <b>BETA</b>.
+
+Simplesmente nos envie uma mensagem e ela será verificada.
+
+Exemplo; <b>urna eletrônica</b>
+
+ou
+
+<b>/busca urna eletrônica</b> - ordenação default, igual a busca acima
+
+<b>/recentes urna eletrônica</b> - ordenado por data decrescente
+
+Para controlar o número de itens retornados basta colocar # número ( 1 a 10 ) Exemplo;
+
+<b>/recentes urna eletrônica #9</b>
+ou
+<b>urna eletrônica #9</b>
+ou
+<b>/busca urna eletrônica #5
+
+
+Temos também uma <a href="https://busca-fatos.fly.dev/">Interface Web</a> para consulta.
+
+`;
+
+
+  /**
+   * /start e /ajuda
+   * 
+   * */
+  const helpPtMsg = `Bem vindo ao <a href="https://buscafatos.com.br/">Busca Fatos</a> <b>BETA</b>.
 
 For help in english type <b>/help</b>
 
@@ -85,7 +115,6 @@ resultados ordenados por data <b>DECRESCENTE</b>.
 Temos também uma <a href="https://busca-fatos.fly.dev/">Interface Web</a> para consulta.
 
 `;
-
 
 
   /**
@@ -137,7 +166,7 @@ bot.onText(/\/start/, (msg) => {
 
 bot.onText(/\/ajuda/, (msg) => {
 
-  bot.sendMessage(msg.chat.id, startMsg, {parse_mode: 'HTML'});
+  bot.sendMessage(msg.chat.id, helpPtMsg, {parse_mode: 'HTML'});
 
 });
 
