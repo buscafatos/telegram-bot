@@ -22,7 +22,6 @@ total de resultados: <b>${totalResults}</b>
 
 `;
 
-
   if(parsed.items && parsed.items.length >= numberOfItems) {
 
      for (var i = 0; i < numberOfItems; i++) {
@@ -161,9 +160,9 @@ bot.onText(/\/help/, (msg) => {
       searchTerm = arr[0];
     }
 
-    console.log(`username = [${username}] - keyword = [${searchTerm}] and nOfResults = [${numberOfResults}]`)
+    // console.log(`username = [${username}] - keyword = [${searchTerm}] and nOfResults = [${numberOfResults}]`)
 
-    const url = `https://busca-fatos.deno.dev/v1/search/${searchTerm}?raw=0&count=${numberOfResults}&sort=date`;
+    const url = `https://api.buscafatos.com.br/v1/search/${searchTerm}?raw=0&count=${numberOfResults}&sort=date`;
     // console.log(`fetching keyword = [${searchTerm}]`)
     const data = await got(url).text();
     // console.log(data)
@@ -184,11 +183,16 @@ bot.onText(/\/help/, (msg) => {
         return;
       }
 
+      // commands handled in other methods
     if (!msg.text.includes('/start') && !msg.text.includes('/recentes')
        && !msg.text.includes('/ajuda') && !msg.text.includes('/help')) {
 
       // console.log(msg.text)
       // console.log('@')
+
+
+      // ingore unknown commands
+      if('/' == msg.text.charAt(0)) { return };
 
       const chatId = msg.chat.id;
       // console.log(msg);
@@ -200,8 +204,9 @@ bot.onText(/\/help/, (msg) => {
       
       let searchTerm = msg.text;
 
+      // if inside group and @mention...
       if ('group' == msg.chat.type && msg.reply_to_message
-        && '@buscafatos_bot' == msg.text) {
+        && '@buscafatos_bot'.toUpperCase() === msg.text.toUpperCase()) {
 
         searchTerm = msg.reply_to_message.text;
 
@@ -218,7 +223,7 @@ bot.onText(/\/help/, (msg) => {
         searchTerm = arr[0];
       }
 
-      console.log(`username = [${username}] - keyword = [${searchTerm}] - nOfResults = [${numberOfResults}]`)
+      // console.log(`username = [${username}] - keyword = [${searchTerm}] - nOfResults = [${numberOfResults}]`)
 
       const url = `https://api.buscafatos.com.br/v1/search/${searchTerm}?raw=0&count=${numberOfResults}`;
       // console.log(`fetching keyword = [${searchTerm}]`)
@@ -226,7 +231,6 @@ bot.onText(/\/help/, (msg) => {
       // console.log(data)
       const response = await cleanMessage(data, numberOfResults, searchTerm);
       // console.log(response);
-
 
       bot.sendMessage(chatId, response, {parse_mode: 'HTML'});
 
