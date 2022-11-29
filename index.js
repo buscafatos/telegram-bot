@@ -121,6 +121,14 @@ We also have a <a href="https://busca-fatos.fly.dev/">Web Interface</a> for cons
 
 `;
 
+bot.setMyCommands([
+  { command: "busca", description: "digite /busca urna eletrônica" },
+  { command: "recentes", description: "digite /recentes urna eletrônica" },
+  { command: "start", description: "informações sobre o bot" },
+  { command: "ajuda", description: "ajuda" },
+]);
+
+
 bot.onText(/\/start/, (msg) => {
 
   bot.sendMessage(msg.chat.id, startMsg, {parse_mode: 'HTML'});
@@ -136,6 +144,59 @@ bot.onText(/\/ajuda/, (msg) => {
 bot.onText(/\/help/, (msg) => {
 
   bot.sendMessage(msg.chat.id, helpMsg, {parse_mode: 'HTML'});
+
+});
+
+// Matches "/busca [whatever]"
+bot.onText(/\/busca (.+)/, async (msg, match) => {
+
+
+      // console.log(msg);
+
+      if (!msg.text) { return; }
+
+      // console.log(msg.text)
+      // console.log('@')
+
+      const chatId = msg.chat.id;
+      // console.log(msg);
+
+      let username = '';
+      if (msg.from.username) {
+        username = msg.from.username;
+      }
+      
+      let searchTerm = match[1];
+
+      // if inside group and @mention...
+      if ('group' == msg.chat.type && msg.reply_to_message
+        && '@buscafatos_bot'.toUpperCase() === msg.text.toUpperCase()) {
+
+        searchTerm = msg.reply_to_message.text;
+
+      } else if ('group' == msg.chat.type) {
+        // console.log('ignoring group message. only replies');
+        return;
+      }
+
+      let arr = searchTerm.split('#');
+      let numberOfResults = 3; // default
+
+      if (arr && arr.length > 1) {
+        numberOfResults = arr[1];
+        searchTerm = arr[0];
+      }
+
+      // console.log(`username = [${username}] - keyword = [${searchTerm}] - nOfResults = [${numberOfResults}]`)
+
+      const url = `https://api.buscafatos.com.br/v1/search/${searchTerm}?raw=0&count=${numberOfResults}`;
+      // console.log(`fetching keyword = [${searchTerm}]`)
+      const data = await got(url).text();
+      // console.log(data)
+      const response = await cleanMessage(data, numberOfResults, searchTerm);
+      // console.log(response);
+
+      bot.sendMessage(chatId, response, {parse_mode: 'HTML'});
 
 });
 
@@ -179,13 +240,12 @@ bot.onText(/\/help/, (msg) => {
 
       // console.log(msg);
 
-      if (!msg.text) {
-        return;
-      }
+      if (!msg.text) { return; }
 
       // commands handled in other methods
     if (!msg.text.includes('/start') && !msg.text.includes('/recentes')
-       && !msg.text.includes('/ajuda') && !msg.text.includes('/help')) {
+       && !msg.text.includes('/ajuda') && !msg.text.includes('/help') 
+       && !msg.text.includes('/busca')) {
 
       // console.log(msg.text)
       // console.log('@')
