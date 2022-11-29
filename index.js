@@ -153,6 +153,7 @@ We also have a <a href="https://busca-fatos.fly.dev/">Web Interface</a> for cons
 bot.setMyCommands([
   { command: "busca", description: "digite /busca urna eletrônica" },
   { command: "recentes", description: "digite /recentes urna eletrônica" },
+  { command: "recentes", description: "digite /recentes urna eletrônica #5" },
   { command: "start", description: "informações sobre o bot" },
   { command: "ajuda", description: "ajuda" },
 ]);
